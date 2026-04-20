@@ -16,10 +16,11 @@ const isAdmin = true
             <v-icon icon="$vuetify"></v-icon>
             <router-link to="/">Orderly</router-link>
         </v-app-bar-title>
+        <v-btn to="/ownershiprequests">Requests</v-btn>
         <v-btn to="/admin">Admin</v-btn>
         <v-btn to="/homepage">Home</v-btn>
         <v-btn to="/restaurantdashboard">Dashboard</v-btn>
-         <v-btn icon="mdi-account" v-if="isLoggedIn">P
+        <v-btn icon="mdi-account" v-if="isLoggedIn">P
             <v-menu activator="parent">
                 <v-list>
                     <v-list-item>

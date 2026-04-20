@@ -1,14 +1,21 @@
 import { ref, computed } from 'vue'
-import api  from './api';
+import api from '@/services/api'
 
-const user = ref(null)
+const storedUser = localStorage.getItem("user")
+
+const user = ref(storedUser && storedUser !== "undefined"
+  ? JSON.parse(storedUser)
+  : null
+)
 const loading = ref(false)
 const error = ref(null)
-
+const isAdmin = ref(
+  localStorage.getItem("isAdmin")
+    ? JSON.parse(localStorage.getItem("isAdmin"))
+    : false
+)
 export function useAuth() {
     const isAuthenticated = computed(() => !!user.value)
-    const isAdmin = ref(false)
-
 
     // Login
     async function login(credentials) {
@@ -29,13 +36,13 @@ export function useAuth() {
         if (token && userData) {
             user.value = userData
 
-            if (user.value.role == 1) isAdmin.value = true
+            isAdmin.value = user.value.role == 1
 
             console.log(user.value)
 
             localStorage.setItem("authToken", token);
             localStorage.setItem("user", JSON.stringify(user.value));
-            localStorage.setItem("isAdmin", isAdmin);
+            localStorage.setItem("isAdmin", JSON.stringify(isAdmin.value));
 
             return response
         } else {
@@ -58,9 +65,11 @@ export function useAuth() {
              const response = await api.post('register', formData)
              const { token, user: userData } = response.data
             if (token && userData) {
+                isAdmin.value = user.value.role == 1
                 user.value = userData
                 localStorage.setItem("authToken", token);
-                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("user", JSON.stringify(user.value));
+                localStorage.setItem("isAdmin", JSON.stringify(isAdmin.value))
 
                 return response
             } else {

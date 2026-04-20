@@ -30,32 +30,50 @@ const signUp = async () => {
     error.value = "";
 
     const formData = new FormData();
+
+     const formattedDob = dob.value
+      ? new Date(dob.value).toISOString().split('T')[0]
+      : null;
+
     formData.append("name", `${firstName.value} ${lastName.value}`.trim());
     formData.append("email", email.value);
     formData.append("phoneNumber", phoneNumber.value);
-    formData.append("dob", dob.value);
+    formData.append("dob", formattedDob);
     formData.append("gender", gender.value);
     formData.append("password", password.value);
     formData.append("password_confirmation", confirmPassword.value);
 
     try {
-        await register(formData)
-        router.push('/homepage')
+    const response = await register(formData)
+    console.log('REGISTER SUCCESS:', response.data)
+    router.push('/homepage')
     } catch (err) {
-        console.error('Sign up failed', err)
+    console.log('ERROR:', err.response?.data || err)
     }
+
+    // try {
+    //     await register(formData)
+    //     router.push('/homepage')
+    // } catch (err) {
+    //     console.error('Sign up failed', err)
+    // }
 };
 
 </script>
 
 <template>
-    <v-container  style="max-width: 600px; background-color:#fffacd" class="text-center mt-16">
+    <v-container  style="max-width: 600px; background-color:#fffacd" class="text-center mt-16 rounded-xl">
         <v-row>
             <v-col md="12">
                 <v-form  @submit.prevent="signUp">
-                    <v-row>
+                     <v-row>
                         <v-col>
-                            <div class="text-display-small font-weight-medium">Sign up</div>
+                            <div class="text-display-small font-weight-medium">Welcome to Orderly</div>
+                        </v-col>
+                    </v-row>
+                    <v-row class="mt-1">
+                        <v-col>
+                            <div class="font-weight-medium">Create an account</div>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
@@ -116,7 +134,7 @@ const signUp = async () => {
                     </v-row>
                     <v-row>
                         <v-col md="12">
-                            <v-btn :disabled="!firstName || !email || !password" width="250" :loading="loading" color="#7BC47F" variant="elevated" type="submit">Sign up</v-btn>
+                            <v-btn  width="250" :loading="loading" color="#7BC47F" variant="elevated" type="submit">Sign up</v-btn>
                         </v-col>
                     </v-row>
                     <div v-if="error" style="color:red; margin-top:10px;">
@@ -125,7 +143,7 @@ const signUp = async () => {
                     <v-row>
                         <v-col md="12">
                             <div>Already have an account?
-                                <router-link to="/login">Back to Login</router-link>
+                                <router-link to="/login">Login</router-link>
                             </div>
                         </v-col>
                     </v-row>

@@ -7,8 +7,8 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
-import * as labsComponents from 'vuetify/labs/components' //For date and time
+import '@mdi/font/css/materialdesignicons.css'
+import * as labsComponents from 'vuetify/labs/components'
 
 // Components
 
@@ -19,7 +19,7 @@ const vuetify = createVuetify({
   },
   directives,
    icons: {
-    defaultSet: 'mdi', // This is already the default value - only for display purposes
+    defaultSet: 'mdi',
   },
   theme:{
     defaultTheme: 'light',

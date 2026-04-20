@@ -45,13 +45,13 @@ const localError = ref("")
 </script>
 
 <template>
-    <v-container width="50%" class="text-center mt-16" style="background-color:#fffacd">
+    <v-container width="50%" class="text-center mt-16 rounded-xl" style="background-color:#fffacd">
         <v-row>
             <v-col md="">
                 <v-form>
                      <v-row>
                         <v-col>
-                            <div class="text-display-small font-weight-medium">Welcome to Orderly</div>
+                            <div class="text-display-small font-weight-medium">Welcome Back</div>
                         </v-col>
                     </v-row>
                     <v-row class="mt-1">
@@ -61,7 +61,7 @@ const localError = ref("")
                     </v-row>
                     <v-row justify="center" class="mt-15">
                         <v-col md="6">
-                            <v-text-field :rules="[rules.required]" prepend-inner-icon="mdi-account" type="email" label="Username" variant="outlined" outlined dense color="#7BC47F" v-model="username"></v-text-field>
+                            <v-text-field :rules="[rules.required]" prepend-inner-icon="mdi-account" type="email" label="Email" variant="outlined" outlined dense color="#7BC47F" v-model="username"></v-text-field>
                              <v-text-field
                                 label="Password"
                                 v-model="password"
@@ -77,7 +77,7 @@ const localError = ref("")
                     </v-row>
                     <v-row>
                         <v-col md="12">
-                            <v-btn :loading="loading" :disabled="!username || !password" width="250" color="#7BC47F" variant="elevated" @click="handleLogin">Login</v-btn>
+                            <v-btn :loading="loading" width="250" color="#7BC47F" variant="elevated" @click="handleLogin">Login</v-btn>
                         </v-col>
                     </v-row>
                     <div v-if="localError" style="color:red; margin-top:10px;">
