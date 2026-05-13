@@ -40,7 +40,16 @@ onMounted(() => {
 })
 </script>
 <template>
-  <v-container>
+  <v-container  style="background-color:#FFFAF0">
+    <v-row class="mb-4">
+      <v-col class="text-center">
+        <h1 class="text-h4 font-weight-bold d-inline-block"
+            style="border-bottom: 5px solid black;"
+        >
+           Ownership Requests
+        </h1>
+      </v-col>
+    </v-row>
     <v-table>
       <thead>
         <tr>
@@ -56,6 +65,8 @@ onMounted(() => {
           <td>{{ req.status }}</td>
 
           <td>
+            <div class="d-flex ga-4"></div>
+
             <v-btn
               color="green"
               size="small"
@@ -64,7 +75,7 @@ onMounted(() => {
             >
               Approve
             </v-btn>
-
+            
             <v-btn
               color="red"
               size="small"

@@ -9,12 +9,10 @@ const { register, loading, error } = useAuth()
     required: value => !!value || 'Required.',
     min: v => v.length >= 8 || 'Min 8 characters',
     passwordMatch: () => password.value === confirmPassword.value || 'Passwords must match'
-  }
+}
+const show1 = ref(false)
+const show1confirm = ref(false)
 
-  const show1 = ref(false)
-  const show1confirm = ref(false)
-
-// models
 const firstName = ref(null)
 const lastName = ref(null)
 const email = ref(null)
@@ -50,17 +48,8 @@ const signUp = async () => {
     } catch (err) {
     console.log('ERROR:', err.response?.data || err)
     }
-
-    // try {
-    //     await register(formData)
-    //     router.push('/homepage')
-    // } catch (err) {
-    //     console.error('Sign up failed', err)
-    // }
 };
-
 </script>
-
 <template>
     <v-container  style="max-width: 600px; background-color:#fffacd" class="text-center mt-16 rounded-xl">
         <v-row>

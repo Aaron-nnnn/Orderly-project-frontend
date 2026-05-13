@@ -3,23 +3,23 @@ import {useRouter} from "vue-router";
 import {useAuth} from '../services/auth'
 
 const router = useRouter();
+const { isAdmin, isRestaurant, isAuthenticated } = useAuth()
 
 const { logout } = useAuth()
 
 const isLoggedIn = localStorage.getItem( "authToken")
-const isAdmin = true
 
 </script>
 <template>
     <v-app-bar color="#fffacd">
         <v-app-bar-title>
-            <v-icon icon="$vuetify"></v-icon>
-            <router-link to="/">Orderly</router-link>
+            <v-icon icon="mdi-circle-outline"></v-icon>
+            <router-link to="/">rderly</router-link>
         </v-app-bar-title>
-        <v-btn to="/ownershiprequests">Requests</v-btn>
-        <v-btn to="/admin">Admin</v-btn>
-        <v-btn to="/homepage">Home</v-btn>
-        <v-btn to="/restaurantdashboard">Dashboard</v-btn>
+        <v-btn  v-if="isAdmin" to="/ownershiprequests">Requests</v-btn>
+        <v-btn  v-if="isAdmin" to="/admin">Admin</v-btn>
+        <v-btn  v-if="isAuthenticated" to="/homepage">Home</v-btn>
+        <v-btn  v-if="isRestaurant" to="/restaurantdashboard">Dashboard</v-btn>
         <v-btn icon="mdi-account" v-if="isLoggedIn">P
             <v-menu activator="parent">
                 <v-list>
